@@ -43,7 +43,6 @@ import org.apache.log4j.Logger;
 
 import com.freedomotic.i18n.I18n;
 import com.freedomotic.util.LogFormatter;
-import com.google.common.collect.ImmutableMap;
 
 /**
  *
@@ -51,7 +50,8 @@ import com.google.common.collect.ImmutableMap;
  */
 public class LogWindow extends JFrame {
 
-    int MAX_TABLE_ROWS = 100;
+	private static final long serialVersionUID = 1L;
+	int MAX_TABLE_ROWS = 100;
     DefaultTableModel model = new DefaultTableModel();
     String[] levels = {
         "ALL",
@@ -81,8 +81,6 @@ public class LogWindow extends JFrame {
         this.setLayout(new BorderLayout());
         areaDetail.setContentType("text/html");
         model.addColumn(I18n.msg("log_level"));
-        //model.addColumn("Class");
-        //model.addColumn("Method");
         model.addColumn(I18n.msg("message"));
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         table.setDefaultRenderer(Object.class, new CustomRenderer());
@@ -112,12 +110,10 @@ public class LogWindow extends JFrame {
         add(new JLabel(I18n.msg("log_level") + ": "), BorderLayout.NORTH);
         cmbLevel.setEditable(false);
         add(cmbLevel, BorderLayout.NORTH);
-        //add(btnStop, BorderLayout.PAGE_START);
         add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         areaDetail.setPreferredSize(new Dimension(600, 100));
         areaDetail.setMinimumSize(new Dimension(600, 100));
         JScrollPane scroll = new JScrollPane(areaDetail, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        //areaDetail.setLineWrap(true);
         add(scroll, BorderLayout.SOUTH);
     }
 

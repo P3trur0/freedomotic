@@ -54,6 +54,7 @@ public class Log4jAppender extends AppenderSkeleton {
 	private Log4jAppender(I18n i18n, Logger logger) {
 		this.logger = logger;
 		this.logger.addAppender(this);
+		this.logger.setLevel(Level.ALL);
 		if (window == null) {
 			window = new LogWindow(i18n, this.logger);
 		}
@@ -80,8 +81,8 @@ public class Log4jAppender extends AppenderSkeleton {
 	protected void append(LoggingEvent event) {
 		if(window!=null) {
 			Level windowLevel = window.getPrintableLogger().getLevel();
-			if(event.getLevel().equals(windowLevel))
-			window.append(new Object[] {windowLevel, event.getMessage().toString()});
+			if(event.getLevel().isGreaterOrEqual(windowLevel))
+				window.append(new Object[] {windowLevel, event.getMessage().toString()});
 		}
 	}
 

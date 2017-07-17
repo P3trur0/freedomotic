@@ -56,14 +56,10 @@ public class LogViewer extends Protocol {
 
     @Override
     protected void onStart() {
+    	logger.setLevel(Level.ALL);
         handler = Log4jAppender.getInstance(getApi().getI18n(), logger);
-       
-        logger.setLevel(Level.ALL);
         logger.addAppender(handler);
-        //IMPORTANT!!!!
-        logger.setLevel(Level.ALL);
         bindGuiToPlugin(handler.window);
-//        showGui();
     }
 
     @Override
